@@ -1,0 +1,10 @@
+select { 
+	padding: 0.5em;
+    border-radius: 5px;
+    font-size: 1.4em;}
+.container { 
+background: #231f20 url(../../images/footer-pattern.png) repeat scroll 0 0;
+margin-bottom: 5em;}
+.mapStyle h1, h2, h3, h4 {
+    color: #fff55c;
+}

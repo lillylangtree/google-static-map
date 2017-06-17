@@ -1,0 +1,33 @@
+<div class='container mapStyle'>
+<h1>{{title}}</h1> 
+
+<div class="row">        
+    <div class="col-md-4 " >
+        <h1>Our Locations</h1>
+        <select ngModel = 'selectedMap' (change)="onChange($event)">
+			<option *ngFor="let map of Maps" ngValue="map">{{map.address}}</option>
+        </select>
+    </div>
+    <div class="col-md-4" >
+        <h3>{{selectedMap.address}}</h3>
+     <!-- flexible map , map object defined in controller directive  
+        <make-map map="map"></make-map> -->
+    
+		<div class='' style='position: relative'>   
+			<img class='img-thumbnail' src="https://maps.googleapis.com/maps/api/staticmap?center={{selectedMap.address}}&zoom={{selectedMap.zoom}}&size={{selectedMap.mapDimensions()}}&markers=color:red|{{selectedMap.address}}&key={{selectedMap.apikey}}" 
+			 /> 
+			<br>
+			<div style='position: absolute; top: 1em; left: 0.6em'>
+
+				<button style='padding: 4px 8px; opacity:0.8'
+				class="btn btn-primary" (click)="selectedMap.zoomIn()">
+					<span class="glyphicon glyphicon-plus"></span></button>
+					
+				<button style='padding: 4px 8px; opacity:0.8'
+				class="btn btn-primary" (click)="selectedMap.zoomOut()"> 
+					<span class="glyphicon glyphicon-minus"></span></button>
+			</div>
+		</div>
+	</div> 
+</div>
+</div>
