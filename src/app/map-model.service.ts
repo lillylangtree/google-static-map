@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class Map {
+ class Map {
 		address: string;
 		zoom: number;
 		width: number;
