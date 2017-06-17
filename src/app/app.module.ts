@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { MapModelService } from './map-model.service';
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 
@@ -12,7 +13,7 @@ import { MapComponent } from './map/map.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [MapModelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
