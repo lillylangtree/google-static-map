@@ -34,8 +34,9 @@ export class MovieDetailComponent implements OnInit {
   getMovie(id: string) {
 		this.movieService.getHttpMovie(id)
 		   .then( 
-				movie => {	this.movie = movie;
-							movie.poster_path = "http://image.tmdb.org/t/p/w370/" + movie.poster_path;
+				theMovie => {	theMovie.poster_path = "http://image.tmdb.org/t/p/w370/" + theMovie.poster_path;	
+								this.movie = theMovie;
+								console.log(this.movie);
 							},
 				 error =>  this.errorMessage = <any>error
 			 );
