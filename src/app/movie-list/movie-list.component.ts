@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieListService } from '../movie-list-service';
 import {ActivatedRoute} from "@angular/router";
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
 @Component({
   selector: 'app-movie-list',
-  providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
   templateUrl: './movie-list.component.html',
   styleUrls: ['./movie-list.component.css']
 })
@@ -21,14 +19,14 @@ export class MovieListComponent implements OnInit {
 		};
 		
 	location: Location;	
-	constructor(private movieService:MovieListService,private route: ActivatedRoute,location: Location) { 
-		this.location = location;
-		console.log(location.path());
+	constructor(private movieService:MovieListService,private route: ActivatedRoute) { 
+	
 		this.route.params.subscribe( params => {
 											if (params['movieTitle']) { //we are searching for movies
 												this.searchString = params['movieTitle'];
 												this.category = 'search';
 												this.search=true;
+												this.title = 'Searching for ' + this.searchString + ' Movies'; 
 											}	else { // we are listing from movies menu
 													this.category = params['category'];
 													this.title = params['category'].replace("_"," ").toUpperCase();
@@ -40,6 +38,7 @@ export class MovieListComponent implements OnInit {
 	}
 
 	ngOnInit() {
+			
 	}
   
 	loading = true;

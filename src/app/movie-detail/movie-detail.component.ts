@@ -20,7 +20,7 @@ export class MovieDetailComponent implements OnInit {
   constructor(private movieService:MovieDetailService,private route: ActivatedRoute) {
 		this.route.params.subscribe( params => {
 											this.category = params['category'];
-											if (params['searchString'])
+											if (params['searchString']) 
 												this.searchString = params['searchString'];
 											this.id = params['movieId'];
 											this.getMovie(this.id);
@@ -34,7 +34,8 @@ export class MovieDetailComponent implements OnInit {
   getMovie(id: string) {
 		this.movieService.getHttpMovie(id)
 		   .then( 
-				theMovie => {	theMovie.poster_path = "http://image.tmdb.org/t/p/w370/" + theMovie.poster_path;	
+				theMovie => {	
+								theMovie.poster_path = "http://image.tmdb.org/t/p/w370" + theMovie.poster_path;	
 								this.movie = theMovie;
 								console.log(this.movie);
 							},

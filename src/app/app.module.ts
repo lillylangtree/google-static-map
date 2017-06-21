@@ -14,7 +14,6 @@ import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
-import { MovieSearchComponent } from './movie-search/movie-search.component';
 
 // Route config let's you map routes to components
 const routes: Routes = [
@@ -58,8 +57,7 @@ export const appRouterModule = RouterModule.forRoot(routes);
     MapComponent,
     HomeComponent,
     MovieListComponent,
-    MovieDetailComponent,
-    MovieSearchComponent
+    MovieDetailComponent
  ],
   imports: [
     BrowserModule,
