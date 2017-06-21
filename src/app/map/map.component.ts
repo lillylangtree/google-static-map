@@ -29,8 +29,9 @@ export class MapComponent implements OnInit {
 			);
 	 
 		this.Maps.push(map2);
- 
+		console.log(this.Maps);
 		this.selectedMap = this.Maps[0];
+		console.log(this.selectedMap);
 	}
 
 	ngOnInit() {

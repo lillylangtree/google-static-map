@@ -1,0 +1,33 @@
+div.repeat:nth-child(6n+1) {   
+  clear:both;
+}
+/* Portrait tablets and small desktops  col-sm*/
+@media (min-width: 768px) and (max-width: 991px) {
+   div.repeat:nth-child(3n+1){ clear: both}
+}
+
+/* Landscape phones and portrait tablets  col-xs*/
+@media (max-width: 767px) {
+  div.repeat:nth-child(2n+1){ clear: both}
+  .navbar-brand > img {display: none;}
+}
+
+/* Portrait phones and smaller  col-xs*/
+@media (max-width: 480px) {
+  div.repeat:nth-child(2n+1){ clear: both}
+  .navbar-brand > img {display: none;}
+}
+div.nextPrev i {
+    cursor: pointer;
+    font-size: 3em;
+    color: blue;
+}
+.pagination {
+    position: relative;
+    bottom: 0.4em;
+    font-size: 2em;
+    padding: 1em;
+    padding-bottom: 1px;
+    padding-top: 1px;
+	color: silver;
+	}

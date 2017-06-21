@@ -1,0 +1,10 @@
+.centerContent {
+    justify-content: center;
+    text-align: center;
+	}
+div.homePage {
+    background: transparent;
+    font-size: large;
+    text-align: center;
+	color: silver;
+}	

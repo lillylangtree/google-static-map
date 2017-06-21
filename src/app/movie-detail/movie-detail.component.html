@@ -1,0 +1,36 @@
+<div class='container'>
+    <h1>{{title}}</h1>
+    <div class='row'>          
+      <div class="col-md-3">
+        <img src={{movie.poster_path}} class='img-responsive'> 
+		<br/>
+          <a *ngIf= 'searchString' [routerLink]="['/movies',category,searchString]" ><button class="btn btn-primary">Return Movies</button></a>
+		  <a *ngIf= '!searchString' [routerLink]="['/movies',category]" ><button class="btn btn-primary">Return Movies</button></a>
+         <button class='btn btn-danger' ngModel='trailer' (click)="showTrailer()" *ngIf='trailer'>Show Trailer</button>
+         
+      </div>
+      <div  class="col-md-7">
+        <h1 class="">{{movie.title}}</h1>
+        <p> Vote Average: {{ movie.vote_average}} Vote Count: ({{movie.vote_count}}) </p>
+        <p>{{movie.overview}}</p>
+        <section class='row'>
+          <div class='col-md-6'>
+              <h3>Tag Line</h3>
+              <p>{{movie.tagline}}</p>
+          </div>
+        
+        </section>
+        <section class='row'>
+          <div class='col-md-9'>
+            <p>Released: {{movie.release_date | date: 'mediumDate'}}  </p>
+          </div>
+          <div class='col-md-3'>
+            <button class='btn btn-success'  *ngIf='showFav' (click)="addFavourite()" >Add Favourite</button>
+          </div>          
+        </section>
+ 
+      </div> 
+    </div>
+    
+</div>
+<!-- <movie-trailer trailer-src="trailerSrc" fade-in="fadeIn"><movie-trailer> -->

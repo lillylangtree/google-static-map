@@ -1,9 +1,98 @@
 <!--The whole content below can be removed with the new code.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!!
-  </h1>
-  <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojREQwMDMxO30NCgkuc3Qxe2ZpbGw6I0MzMDAyRjt9DQoJLnN0MntmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMTI1LDMwIDEyNSwzMCAxMjUsMzAgMzEuOSw2My4yIDQ2LjEsMTg2LjMgMTI1LDIzMCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAJIi8+DQoJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxMjUsMzAgMTI1LDUyLjIgMTI1LDUyLjEgMTI1LDE1My40IDEyNSwxNTMuNCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAxMjUsMzAgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQ0KCQlMMTI1LDUyLjF6IE0xNDIsMTM1LjRIMTA4bDE3LTQwLjlMMTQyLDEzNS40eiIvPg0KPC9nPg0KPC9zdmc+DQo=" />
-</div>
-<app-map></app-map>
+<nav class="navbar navbar-inverse" >   
+    <div class='container' >
+        <div class="nav navbar-header">
+          <a class="navbar-brand" [routerLink]="['/']">MoviesDB</a>
+          <button type="button" class="navbar-toggle" 
+            data-toggle="collapse" 
+            data-target="#myCollapsingList">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myCollapsingList" >
+          <ul class="nav navbar-nav navbar-right">
+            <form [formGroup]='movieForm' (ngSubmit)="movieFind(movieForm.value)" class="navbar-form navbar-left" role="search">
+                    <div id='searchBox' class="form-group">
+                        <input type="text" formControlName = 'movieSearch' class="form-control" placeholder="Search Movies">
+                        <span id='searchIcon' class="glyphicon glyphicon-search search-icon"></span>
+                    </div>
+                    <button type="submit"  class="btn btn-danger">Go</button>
+            </form>
+            <li><a  [routerLink]="['/about']">About</a></li>
+
+            <li class="dropdown">
+              <a  class="dropdown-toggle " data-toggle="dropdown" 
+                            role="button" 
+                            aria-haspopup="true" 
+                            aria-expanded="false">Movies <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a [routerLink]="['/movies/popular']">Popular</a></li>
+                <li><a [routerLink]="['/movies/upcoming']">Upcoming</a></li>
+                <li><a [routerLink]="['/movies/now_playing']">Now Playing</a></li>      
+                <li><a [routerLink]="['/movies/top_rated']">Top Rated</a></li>
+			  </ul>
+            </li>
+			<!--
+            <form id='login' class="navbar-form navbar-left " *ngIf='!loggedIn'>
+              <div class="form-group">
+                <input type="text" ngModel='user.email' class="form-control" placeholder="email" name='email'>
+                <input type="password" ngModel='user.password' class="form-control" placeholder="password" name= 'password'>
+              </div>
+              <button type="submit" (click)='loginUser()' class="btn btn-primary">login</button>
+              <button type="submit" (click)='registerModal()' class="btn btn-success">register</button>
+            </form>
+            <form class="navbar-form navbar-left loggedInForm" *ngIf='loggedIn'>
+              <div class="form-group form-inline">
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="#/movies/favorites">{{ authUser.password.email  }}</a></li>
+                  <li><a href="#/movies/favorites">My Favorites</a></li>
+                </ul>
+              </div>
+              <button  type="submit" (click)='logoutUser()' class="btn btn-danger btn-xs">logout</button>
+            </form>
+            -->
+            
+          </ul>
+      </div>
+    </div>
+    <section id="myModal" class="modal fade {{fadeIn}}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="closeModal()" aria-hidden="true">&times;</button>
+                <h1 class="modal-title">Registration</h1>
+                  <p>Please register with an email and password. Once registered you will be able to
+                     save your favourite movies. </p>
+            </div>
+            <div class="modal-body">
+              <div class='container-fluid'>
+                <div class="row">                   
+                   <div class="col-md-12">
+                    <form class="navbar-form navbar-left " *ngIf='!loggedIn'>
+                      <div class="form-group">
+                        <input type="text" ngModel='registerUser.email' class="form-control" placeholder="email" name='email'>
+                        <input type="password" ngModel='registerUser.password' class="form-control" placeholder="password" name='password'>
+                      </div>
+                      <button type="submit" (click)='registerUser()' class="btn btn-success">Register</button>
+                    </form>
+                    <div   *ngIf='loggedIn'>
+                      <p>Registration for {{ <!-- registerUser.email --> }} Successful !!</p>    
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="closeModal()">Close</button>               
+            </div>
+        </div>
+    </div>
+  </section>
+  </nav>
+
+<router-outlet></router-outlet>
+
 
