@@ -51,12 +51,13 @@ export class MovieDetailComponent implements OnInit {
 											if (params['searchString']) 
 												this.searchString = params['searchString'];
 											this.id = params['movieId'];
-											this.getMovie(this.id);
+											
 										}
 									);
 			}
 
-  ngOnInit() { this.title = 'Movie Details';
+  ngOnInit() {  this.title = 'Movie Details';
+				this.getMovie(this.id);
   }
  
   getMovie(id: string) {
