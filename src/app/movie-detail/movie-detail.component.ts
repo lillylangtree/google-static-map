@@ -45,7 +45,7 @@ export class MovieDetailComponent implements OnInit {
   searchString: string;
   
   constructor(private movieService:MovieDetailService,private route: ActivatedRoute) {
-		this.movie = new Movie();
+		
 		this.route.params.subscribe( params => {
 											this.category = params['category'];
 											if (params['searchString']) 
