@@ -11,8 +11,7 @@ export class MovieDetailService {
 
   constructor(private http: Http) { }
   
-  getHttpMovie(id: string) {
-	let myMovieConfig = {
+  	myMovieConfig = {
 			"moviesEndpoint" : "https://api.themoviedb.org/3/movie",
 			"moviesSearchEndpoint" : "https://api.themoviedb.org/3/search/movie?query=",
 			"apiKey": "35e16679c616a21b9ddebb66272c5902",
@@ -27,18 +26,33 @@ export class MovieDetailService {
 			"movieDetailsEndPoint" : "http://api.myapifilms.com/imdb/idIMDB?idIMDB=",
 			"moviesTrailerEndPoint": "http://api.myapifilms.com/trailerAddict/taapi?idIMDB="
 		}
-	
-	let url = myMovieConfig.moviesEndpoint + '/' + id + '?api_key=' + myMovieConfig.apiKey;console.log(url);
+		
+  getHttpMovie(id: string) {
+	let url = this.myMovieConfig.moviesEndpoint + '/' + id + '?api_key=' + this.myMovieConfig.apiKey;
 	return this.http.get(url)
                   .toPromise()
                   .then(this.extractData)
                   .catch(this.handleError);
- 
   }
+  getHttpMovieTrailer(imdbID: string) {
+	let url = this.myMovieConfig.moviesTrailerEndPoint  + imdbID + '&token=' + this.myMovieConfig.myapifilmtoken;
+            return this.http.get('https://moviedbtrailers.herokuapp.com/movieTrailer', {   //url   to node server acting as proxy
+                params: {url: url}            
+            }).toPromise()
+              .then(this.extractTrailerData)
+              .catch(this.handleError);
+  }
+  
   private extractData(res: Response) {
 		let body = res.json();
 		console.log(body);
 		return body || { };
+	}
+	
+	  private extractTrailerData(res: Response) {
+		let body = res.json();
+		console.log(body.data.trailer[0]);
+		return body.data.trailer[0] || { };
 	}
  
 	private handleError (error: Response | any) {

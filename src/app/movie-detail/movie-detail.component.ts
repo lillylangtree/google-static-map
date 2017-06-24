@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieDetailService } from '../movie-detail.service';
 import { ActivatedRoute} from "@angular/router";
+import { DomSanitizer } from  "@angular/platform-browser";
 
 class Movie {
 	title: string;
@@ -43,8 +44,11 @@ export class MovieDetailComponent implements OnInit {
   movie: Movie;
   errorMessage: string;
   searchString: string;
-  
-  constructor(private movieService:MovieDetailService,private route: ActivatedRoute) {
+  fadeIn = 'out';
+  trailer=false;
+  trailerSrc: any;
+ 
+  constructor(private movieService:MovieDetailService,private route: ActivatedRoute,private sanitizer: DomSanitizer) {
 		
 		this.route.params.subscribe( params => {
 											this.category = params['category'];
@@ -63,15 +67,37 @@ export class MovieDetailComponent implements OnInit {
   getMovie(id: string) {
 		this.movieService.getHttpMovie(id)
 		   .then( 
-				theMovie => {	
+				theMovie => {	console.log(theMovie);
 								theMovie.poster_path = "http://image.tmdb.org/t/p/w370" + theMovie.poster_path;	
 								this.movie = new Movie(theMovie.title,theMovie.vote_count,theMovie.vote_average,theMovie.poster_path,
 														theMovie.tagline,theMovie.release_date,theMovie.overview);
 								console.log(this.movie);
+								return theMovie.imdb_id;
 							},
 				 error =>  this.errorMessage = <any>error
-			 );
+			 )
+			 .then( 
+				imdbID => { console.log(imdbID);
+							this.movieService.getHttpMovieTrailer(imdbID)
+							.then( 
+								trailerMovie => {	console.log(trailerMovie);
+													this.trailer=true;
+													this.trailerSrc = this.sanitizer.bypassSecurityTrustResourceUrl("https://v.traileraddict.com/" + trailerMovie.trailer_id);
+													},
+											 
+								error =>  this.errorMessage = <any>error
+								 )
+						 }
+				);
+			 
 	}
+
+	showTrailer = function() {
+                      this.fadeIn = 'in'
+                    }
+    closeModal = function() {
+                      this.fadeIn = 'out'
+                    }
 
 
 }
