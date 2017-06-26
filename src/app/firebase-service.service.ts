@@ -67,22 +67,21 @@ export class FirebaseServiceService {
 				}
 		)
 		
-		if (!found)    {    // false if not in existing favourite list*/
+		if (!found)    {    // false if not in existing favourite list
 			this.getFavouriteMovies().push(movie);
 			}// add new movie data to favorites list
 		//else
 		//	return new Promise<void>(resolve => resolve());
 			//return Promise.resolve("all ready favourite");
 	}
-	
-  
+
   registerUser(email, password) {
-  
-    return this.getAuth().createUserWithEmailAndPassword(email,password)
-	.then( res => { return res } )
-	.catch(error => {return(error);});
-	}  
- /**
+      return this.getAuth().createUserWithEmailAndPassword(email,password)
+				.then( res => { return res } )
+				.catch(error => {return(error);});
+	} 
+	
+  /*
    * Logs the user in using their Email/Password combo
    * @param email
    * @param password

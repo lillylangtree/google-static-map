@@ -15,11 +15,13 @@ export class FavouritesComponent implements OnInit {
 	user;
 	title = 'My Favourites';
 	category = 'favourites';
+	loading: boolean;
 	
 	constructor(private router: Router,private route: ActivatedRoute,private dbService: FirebaseServiceService) { 
 		this.user = dbService.getUser();
 		if (!this.user)
 			this.router.navigate(['/']);
+		this.loading=true;	
 		console.log(this.user);
 		
   }
@@ -33,6 +35,7 @@ export class FavouritesComponent implements OnInit {
 							console.log(snapshot.key, snapshot.val());
 							movieArray.push(snapshot);
 						});
+						this.loading=false;
 						this.movieList = movieArray;
 						console.log(this.movieList);
 	 
