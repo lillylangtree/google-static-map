@@ -61,7 +61,7 @@ export class MovieDetailComponent implements OnInit {
 													this.searchString = params['searchString'];
 												this.id = params['movieId'];
 												this.authUser = this.dbService.getUser();
-											    if (this.authUser && this.category != 'favorites') {
+											    if (this.authUser && this.category != 'favourites') {
 													  this.showFav = true;
 											   } else {
 													  this.showFav = false;
