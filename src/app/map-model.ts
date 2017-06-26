@@ -8,16 +8,16 @@
 
 
 		constructor(address: string,
-		zoom: number,
-		width: number,
-		height: number,
-		apikey: string) {
-			this.address= address;
-			this.zoom=zoom;
-			this.width=width;
-			this.height=height;
-			this.apikey=apikey
-		}
+					zoom: number,
+					width: number,
+					height: number,
+					apikey: string) {
+						this.address= address;
+						this.zoom=zoom;
+						this.width=width;
+						this.height=height;
+						this.apikey=apikey
+					}
 		
 //		getMap(address: string,zoom: number,width: number, height: number, apikey: string ): Map {
 //			return new Map(address,zoom,width,height,apikey); 

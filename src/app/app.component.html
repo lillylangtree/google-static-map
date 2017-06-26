@@ -35,30 +35,30 @@
                 <li><a [routerLink]="['/movies/top_rated']">Top Rated</a></li>
 			  </ul>
             </li>
-			<!--
-            <form id='login' class="navbar-form navbar-left " *ngIf='!loggedIn'>
+			 
+            <form  class="navbar-form navbar-left " *ngIf='!loggedIn'>
               <div class="form-group">
-                <input type="text" ngModel='user.email' class="form-control" placeholder="email" name='email'>
-                <input type="password" ngModel='user.password' class="form-control" placeholder="password" name= 'password'>
+                <input type="text" [(ngModel)]='user.email' class="form-control" placeholder="email" name='email'>
+                <input type="password" [(ngModel)]='user.password' class="form-control" placeholder="password" name='password'>
               </div>
-              <button type="submit" (click)='loginUser()' class="btn btn-primary">login</button>
-              <button type="submit" (click)='registerModal()' class="btn btn-success">register</button>
+              <button type="button" (click)='loginUser()' class="btn btn-primary">login</button>
+              <button type="button" (click)='registerModal()' class="btn btn-success">register</button>
             </form>
             <form class="navbar-form navbar-left loggedInForm" *ngIf='loggedIn'>
               <div class="form-group form-inline">
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a href="#/movies/favorites">{{ authUser.password.email  }}</a></li>
-                  <li><a href="#/movies/favorites">My Favorites</a></li>
+                  <li><a [routerLink]="['/movies/favourites']">{{ authUser.email  }}</a></li>
+                  <li><a [routerLink]="['/movies/favourites']">My Favorites</a></li>
                 </ul>
               </div>
               <button  type="submit" (click)='logoutUser()' class="btn btn-danger btn-xs">logout</button>
             </form>
-            -->
+             
             
           </ul>
       </div>
     </div>
-    <section id="myModal" class="modal fade {{fadeIn}}">
+    <section id="myModal" class="modal fade {{fadeIn}}" *ngIf='!loggedIn'>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -71,13 +71,24 @@
               <div class='container-fluid'>
                 <div class="row">                   
                    <div class="col-md-12">
-                    <form class="navbar-form navbar-left " *ngIf='!loggedIn'>
-                      <div class="form-group">
-                        <input type="text" ngModel='registerUser.email' class="form-control" placeholder="email" name='email'>
-                        <input type="password" ngModel='registerUser.password' class="form-control" placeholder="password" name='password'>
-                      </div>
-                      <button type="submit" (click)='registerUser()' class="btn btn-success">Register</button>
-                    </form>
+                    <form [formGroup]="registerForm" (ngSubmit)="registerUser(registerForm.value)" class="navbar-form navbar-left " *ngIf='!loggedIn'>
+                    
+					  <div class="form-group" 
+							[ngClass]="{
+									  'has-danger': registerForm.controls['email'].invalid && registerForm.controls['email'].dirty, 
+									  'has-success': registerForm.controls['email'].valid && registerForm.controls['email'].dirty 
+									}">
+                        <input type="text" formControlName='email' class="form-control" placeholder="email" name='email' >
+					  </div>
+					  <div class="form-group">
+						<input type="password" formControlName='password' class="form-control" placeholder="password" name='password' >
+					  </div>
+                      <button type="submit"  [disabled]="!registerForm.valid" class="btn btn-success">Register</button>
+                      <br/><br/>
+					  <div class="alert" *ngIf="!registerForm.controls['password'].valid && registerForm.controls['password'].touched">You must specify a password that's between 8 and 20 characters.</div> 
+					  <div class="alert" *ngIf="!registerForm.controls['email'].valid && registerForm.controls['email'].touched">{{ titleAlert }}</div>
+					  	
+					</form>
                     <div   *ngIf='loggedIn'>
                       <p>Registration for {{ <!-- registerUser.email --> }} Successful !!</p>    
                     </div> 
@@ -92,7 +103,7 @@
     </div>
   </section>
   </nav>
-
+ 
 <router-outlet></router-outlet>
 
 

@@ -27,9 +27,9 @@
           <div class='col-md-9'>
             <p>Released: {{movie.release_date | date: 'mediumDate'}}  </p>
           </div>
- <!--         <div class='col-md-3'>
+          <div class='col-md-3'>
             <button class='btn btn-success'  *ngIf='showFav' (click)="addFavourite()" >Add Favourite</button>
-          </div>      -->    
+          </div>         
         </section>
  
       </div> 
@@ -37,7 +37,7 @@
     
 </div>
 <!-- <movie-trailer trailer-src="trailerSrc" fade-in="fadeIn"><movie-trailer> -->
-<section id="myModal" class="modal fade {{fadeIn}}">
+<section id="myModal" class="modal fade {{fadeIn}}" *ngIf='trailer'>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -47,8 +47,8 @@
             <div class="modal-body">
               <div class='container-fluid'>
                 <div class="row">                   
-                   <div class="col-md-12">
-                  <iframe  [src]="trailerSrc" width="560" height='315' allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="no" scrolling="no" autoplay="false"></iframe>
+                   <div class="col-md-12" id='divScope'>
+                  <iframe [src]="trailerSrc" width="560" height='315' allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="no" scrolling="no" autoplay="false"></iframe>
                   </div>
                 </div>
               </div>

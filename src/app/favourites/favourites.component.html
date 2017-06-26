@@ -1,0 +1,25 @@
+<section class='container-fluid'>
+    <!--<movie-nav current-nav='currentNav'></movie-nav> -->
+    <section class='row'>
+        <div class='col-md-offset-2 col-md-8 col-sm-8'>
+            <div *ngIf='loading'><h1>Loading.....</h1></div>
+            <h3>{{title}} </h3><hr/>
+        </div>
+    </section>
+
+    <section class='row'>
+        <div class="col-md-offset-2 col-md-8 col-sm-8 ">
+            <table>
+                <tr><th>Title</th><th>Released</th></tr>
+                <tr *ngFor="let movie of movieList ">
+                    <td>{{movie.val().Title}}</td><td>{{movie.val().Year | date: 'mediumDate'}}</td>
+                    <td><a [routerLink]="['/movies',movie.val().imdbID,category]" class="btn btn-primary">
+                        Details
+                    </a></td>
+                    <td> <button class='btn btn-danger' (click)="deleteFavourite(movie.key)" >Remove</button></td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+</section>
